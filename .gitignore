@@ -1,0 +1,33 @@
+# Environment variables / Secrets
+.env
+secret.txt
+
+# Virtual environments
+.venv/
+venv/
+env/
+dist/
+build/
+
+# Python cache and artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Local cache / project specific
+tiktoken_cache/
+.tiktoken_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
