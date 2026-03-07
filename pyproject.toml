@@ -15,7 +15,8 @@ dependencies = [
     "langchain-text-splitters (>=1.1.1,<2.0.0)",
     "langchain-openai (>=1.1.10,<2.0.0)",
     "qdrant-client (>=1.17.0,<2.0.0)",
-    "langchain-qdrant (>=1.1.0,<2.0.0)"
+    "langchain-qdrant (>=1.1.0,<2.0.0)",
+    "psycopg[binary] (>=3.3.3,<4.0.0)"
 ]
 
 [tool.poetry]

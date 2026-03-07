@@ -123,3 +123,28 @@ rag-hotel/
 ├── pyproject.toml
 └── poetry.lock
 ````
+
+
+## Final architecture(ideal)
+
+```bash
+
+                User
+                 │
+                 ▼
+            Agent Router
+        ┌────────┼─────────┐
+        │        │         │
+        ▼        ▼         ▼
+      RAG     SQL DB     Actions
+   (PDFs)   (Postgres)   (Tools)
+        │        │         │
+        └────────┴─────────┘
+                 │
+                 ▼
+                LLM
+                 │
+                 ▼
+               Answer
+
+```

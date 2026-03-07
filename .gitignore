@@ -28,6 +28,9 @@ tiktoken_cache/
 *.swp
 *.swo
 
+# database files
+.sql
+
 # OS files
 .DS_Store
 Thumbs.db
