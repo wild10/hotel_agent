@@ -1,4 +1,4 @@
-from connection import get_connection
+from app.database.connection import get_connection
 
 
 # 1 Ver habitaciones.
@@ -95,7 +95,9 @@ def do_checkout(reserva_id):
 
 # create main
 if __name__== '__main__':
+    rooms = get_rooms()
+    print(f"rooms: -> {rooms}")
     available_rooms = get_available_rooms()
-    print(available_rooms)
+    print(f"available rooms:{available_rooms}")
     reservation_id = get_reservations_by_id('87654321')
-    print(reservation_id)
+    print(f"reservation --> {reservation_id}")

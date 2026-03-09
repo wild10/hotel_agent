@@ -16,11 +16,15 @@ dependencies = [
     "langchain-openai (>=1.1.10,<2.0.0)",
     "qdrant-client (>=1.17.0,<2.0.0)",
     "langchain-qdrant (>=1.1.0,<2.0.0)",
-    "psycopg[binary] (>=3.3.3,<4.0.0)"
+    "psycopg[binary] (>=3.3.3,<4.0.0)",
+    "langgraph (>=1.0.10,<2.0.0)",
+    "langchain-core (>=1.2.18,<2.0.0)"
 ]
 
 [tool.poetry]
-packages = [{include= "app"}]
+packages = [{include = "app"}]
+# Alternative: if you want to run it as a module, you might need to set PYTHONPATH=.
+
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

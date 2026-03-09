@@ -19,21 +19,7 @@ def build_context(chunks):
 
 
 def generate_answer(question:str):
-    # creamos el vector database.
-    cliente_qdrant = get_qdrant_client()
-    # cargamos el documento
-    documentos = load_pdfs('data/pdf')
-    # dividimos el doc en partes(chunks)
-    chunks = split_documents(documentos)
-    # creamos los embeddinsgs.
-    vectors = embed_chunks(chunks)
-    # get size para almancenar en qdrant
-    vector_size =len( vectors[0])
-    # verificar si existe vector bd.
-    create_collection_if_not_exits(cliente_qdrant, vector_size)
-    # hace almacenar en vector store:
-    store_embeddings(chunks, vectors)
-    # recuperar chunks relevantes.
+    # recuperar chunks relevantes directamente de Qdrant
     chunks = retrieve_chunks(question, top_k=3)
 
     # construir contexto

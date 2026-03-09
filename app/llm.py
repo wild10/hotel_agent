@@ -1,3 +1,5 @@
+# using wrapper of open ai sdk
+from langchain_openai import ChatOpenAI
 from openai import OpenAI
 
 from app.config import OPEN_API_KEY
@@ -14,3 +16,10 @@ def ask_llm(my_prompt: str) -> str:
         input = my_prompt 
     )
     return reponse.output[0].content[0].text
+
+def get_llm():
+    return ChatOpenAI(
+        model= "gpt-4.1-mini",
+        temperature=0,
+        api_key=OPEN_API_KEY
+    )
