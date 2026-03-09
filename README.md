@@ -91,11 +91,11 @@ hotel_agent/
 
 ## 🔄 Workflow Logic
 
-Este proyecto utiliza el patrón **ReAct (Reasoning and Acting)** a través de LangGraph para decidir qué herramienta utilizar según la consulta del usuario.
+This project use the **ReAct (Reasoning and Acting)** a través de LangGraph to decide what tool to use according to the user's query.
 
 ![Workflow Diagram](docs/workflow_diagram.png)
 
-### Diagrama de Flujo (Mermaid)
+### Workflow Diagram
 
 ```mermaid
 graph TD
