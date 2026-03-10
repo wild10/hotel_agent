@@ -118,28 +118,30 @@ def tool_create_reservation(
 @tool
 def tool_get_reservations(id_number: str) -> str:
     """
-    Consulta todas las reservas de un huésped por su número de documento.
-    Úsala cuando el usuario quiera ver sus reservas activas o historial.
+    Consulta y lista todas las reservas asociadas a un número de identificación (ID/Documento).
+    Úsala cuando el usuario quiera verificar si su reserva se realizó correctamente,
+    ver el estado de sus reservas, o el historial de las mismas.
     
     Args:
-        id_number: Número de documento de identidad del huésped
+        id_number: El número de documento o ID con el que se hizo la reserva.
     """
     try:
         reservations = get_reservations_by_id(id_number)
         
         if not reservations:
-            return f"No se encontraron reservas para el documento {id_number}."
+            return f"No se encontraron reservas para el documento {id_number}. Por favor, verifica que el número sea correcto."
         
-        result = f" Reservas para documento {id_number}:\n\n"
+        result = f" ✅ Reservas encontradas para el documento {id_number}:\n\n"
         for res in reservations:
-            result += f"- Reserva #{res['reserva_id']}: "
-            result += f"Habitación {res['habitacion_id']} | "
-            result += f"Check-in: {res['fecha_inicio']} | "
-            result += f"Check-out: {res['fecha_fin']} | "
+            # La función de BD retorna 'reserva_id'
+            result += f"- Reserva #{res['reserva_id']}: Habitación {res['habitacion_id']} | "
+            result += f"Check-in: {res['fecha_inicio']} | Check-out: {res['fecha_fin']} | "
             result += f"Estado: {res['status']}\n"
         return result
     except Exception as e:
-        return f"Error al consultar reservas: {str(e)}"
+        # Imprimir para debug en consola pero retornar mensaje útil al usuario
+        print(f"Error en tool_get_reservations: {str(e)}")
+        return f"Lo siento, hubo un problema al consultar las reservas para el ID {id_number}. Por favor, intente de nuevo o contacte a soporte."
 
 
 @tool

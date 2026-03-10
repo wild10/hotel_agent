@@ -68,3 +68,19 @@ BEGIN
     WHERE g.id_number = p_id_number;
 END;
 $$;
+
+
+--- eliminar privilegios previos para user hotel_user y 
+--- otorgar solo los necesarios para el agente.
+REVOKE ALL PRIVILEGES ON TABLE reservas FROM hotel_user;
+REVOKE ALL PRIVILEGES ON TABLE habitaciones FROM hotel_user;
+REVOKE ALL PRIVILEGES ON TABLE huespedes FROM hotel_user;
+
+--- dar acceso a lectura y solo insertar a algunas tablas,
+--- sin delete, update or algo que provoque mas uso sql injection.
+GRANT SELECT ON habitaciones TO hotel_user;
+GRANT SELECT, INSERT ON reservas TO hotel_user;
+GRANT SELECT, INSERT ON huespedes TO hotel_user;
+
+--- permiter y dar permisos para generar el sgt id automatico y correcto al insertar.
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO hotel_user;

@@ -8,9 +8,9 @@ from qdrant_client.models import Distance, PointStruct, VectorParams
 from app.config import COLLECTION_NAME, QDRANT_HOST, QDRANT_PORT
 
 ## show info 
-logging.basicConfig(
-    level = logging.INFO,
-)
+# logging.basicConfig(
+#     level = logging.INFO,
+# )
 
 def get_qdrant_client():
     """

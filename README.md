@@ -38,6 +38,7 @@ DB_PASSWORD=hotel_password
 - **PostgreSQL**: Ensure your database is running and the schema is loaded (see `script_hotel_bd_agent.sql`).
 - **Qdrant**: Run the vector database using Docker:
 ```bash
+
 docker run -p 6333:6333 qdrant/qdrant
 ```
 
@@ -49,16 +50,21 @@ The RAG system uses PDFs located in `data/pdf/` to answer questions about:
 - Frequently Asked Questions (FAQ)
 
 ### Step 1: Ingest Documents
+
 Before running the agent, you must index the PDFs into the vector database. This only needs to be run once or when the PDFs change.
 ```bash
 export PYTHONPATH=$PYTHONPATH:.
 python3 app/rag/ingest.py
+# or using this with modules python.
+poetry run python -m app.rag.ingest
 ```
 
 ### Step 2: Run the Agent
 Run the main entry point to start the chatbot.
 ```bash
 python3 app/agent/workflow.py
+# this is for avoid using export PYTHONPATH=$PYTHONPATH:.
+poetry run python -m app.agent.workflow
 ```
 
 ## 🏗️ Project Architecture
@@ -91,7 +97,7 @@ hotel_agent/
 
 ## 🔄 Workflow Logic
 
-This project use the **ReAct (Reasoning and Acting)** a través de LangGraph to decide what tool to use according to the user's query.
+This project use the **ReAct (Reasoning and Acting)** pattern through LangGraph to decide what tool to use according to the user's query.
 
 ![Workflow Diagram](docs/workflow_diagram.png)
 

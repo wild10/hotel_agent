@@ -12,14 +12,13 @@ RETURNS TABLE (
     huesped_email   VARCHAR
 )
 LANGUAGE plpgsql
+SECURITY DEFINER  -- 👈 esta es la clave
 AS $$
 BEGIN
-    -- 1. Verificar si el huesped existe
     IF NOT EXISTS (SELECT 1 FROM huespedes WHERE id_number = p_id_number) THEN
         RAISE EXCEPTION 'Huesped con id_number % no encontrado', p_id_number;
     END IF;
 
-    -- 2. Retornar reservas con info completa
     RETURN QUERY
     SELECT 
         r.id,

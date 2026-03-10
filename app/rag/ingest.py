@@ -10,18 +10,18 @@ def ingest_documents():
     print("🚀 Iniciando proceso de ingestión robusto...")
     
     client = get_qdrant_client()
-    print("📁 Cargando PDFs desde data/pdf...")
+    print("1 Cargando PDFs desde data/pdf...")
     documents = load_pdfs('data/pdf')
-    print(f"✅ Se cargaron {len(documents)} páginas.")
+    print(f"2  Se cargaron {len(documents)} páginas.")
     
-    print("✂️ Dividiendo documentos en chunks...")
+    print("Dividiendo documentos en chunks...")
     chunks = split_documents(documents)
-    print(f"✅ Se generaron {len(chunks)} chunks.")
+    print(f"3 Se generaron {len(chunks)} chunks.")
     
     embeddings_model = get_embeddings_models()
     vectors = []
     
-    print("🧠 Generando embeddings con reintentos...")
+    print("Generando embeddings con reintentos...")
     for idx, chunk in enumerate(chunks):
         max_retries = 5
         retry_delay = 2
@@ -50,9 +50,9 @@ def ingest_documents():
     vector_size = len(vectors[0])
     create_collection_if_not_exits(client, vector_size)
     
-    print("💾 Almacenando en Qdrant...")
+    print(" Almacenando en Qdrant...")
     store_embeddings(chunks, vectors)
-    print("✨ Proceso de ingestión completado exitosamente.")
+    print(" Proceso de ingestión completado exitosamente.")
 
 if __name__ == "__main__":
     ingest_documents()
