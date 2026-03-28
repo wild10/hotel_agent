@@ -8,6 +8,9 @@ venv/
 env/
 dist/
 build/
+.sql 
+.lock
+next_steps.md
 
 # Python cache and artifacts
 __pycache__/
@@ -34,3 +37,10 @@ tiktoken_cache/
 # OS files
 .DS_Store
 Thumbs.db
+
+tiktoken_cache/
+data/
+__pycache__/
+*.sqlite
+*.db
+.env

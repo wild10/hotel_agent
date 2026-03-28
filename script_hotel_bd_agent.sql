@@ -70,17 +70,47 @@ END;
 $$;
 
 
---- eliminar privilegios previos para user hotel_user y 
---- otorgar solo los necesarios para el agente.
-REVOKE ALL PRIVILEGES ON TABLE reservas FROM hotel_user;
-REVOKE ALL PRIVILEGES ON TABLE habitaciones FROM hotel_user;
-REVOKE ALL PRIVILEGES ON TABLE huespedes FROM hotel_user;
+CREATE OR REPLACE FUNCTION create_reservation(
+    p_id_number TEXT,
+    p_name TEXT,
+    p_room_id INT,
+    p_checkin DATE,
+    p_checkout DATE
+)
+RETURNS INT
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+    v_huesped_id INT;
+    v_reserva_id INT;
+BEGIN
 
---- dar acceso a lectura y solo insertar a algunas tablas,
---- sin delete, update or algo que provoque mas uso sql injection.
-GRANT SELECT ON habitaciones TO hotel_user;
-GRANT SELECT, INSERT ON reservas TO hotel_user;
-GRANT SELECT, INSERT ON huespedes TO hotel_user;
+    -- 1. Crear o actualizar huésped
+    INSERT INTO huespedes (id_number, nombre)
+    VALUES (p_id_number, p_name)
+    ON CONFLICT (id_number)
+    DO UPDATE SET nombre = EXCLUDED.nombre
+    RETURNING id INTO v_huesped_id;
 
---- permiter y dar permisos para generar el sgt id automatico y correcto al insertar.
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO hotel_user;
+    -- 2. Crear reserva
+    INSERT INTO reservas (
+        habitacion_id,
+        fecha_inicio,
+        fecha_fin,
+        status,
+        huesped_id
+    )
+    VALUES (
+        p_room_id,
+        p_checkin,
+        p_checkout,
+        'pendiente',
+        v_huesped_id
+    )
+    RETURNING id INTO v_reserva_id;
+
+    RETURN v_reserva_id;
+
+END;
+$$;

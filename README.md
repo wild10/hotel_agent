@@ -78,6 +78,9 @@ hotel_agent/
 │   ├── database/       # DB connection and SQL queries
 │   │   ├── connection.py
 │   │   └── queries.py
+│   ├── mcp/            # MCP Pipeline
+│   │   ├── map_client.py       # MCP Client
+│   │   
 │   ├── rag/            # RAG Pipeline
 │   │   ├── loader.py       # PDF Loading
 │   │   ├── splitter.py     # Text chunking
@@ -90,6 +93,8 @@ hotel_agent/
 │   └── llm.py          # LLM Factory
 ├── data/
 │   └── pdf/            # Document source for RAG
+├── mcp_servers/
+│   └── map_server.py   # MCP Server foro google maps
 ├── .env                # Environment variables
 ├── pyproject.toml      # Poetry dependencies
 └── README.md
